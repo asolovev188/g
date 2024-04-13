@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import*
-class FinalWin(QWidget):
+class FinalWin(QWidget,rezult):
     def __init__(self):
         super().__init__()
         self.initUI()

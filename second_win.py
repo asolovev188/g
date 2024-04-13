@@ -1,4 +1,6 @@
-from PyQt5.QtCore import Qt
+
+from PyQt5.QtCore import Qt, QTimer, QTime,QLocale
+from PyQt5.QtGui import QDoubleValidator, QIntValidator, QFont
 from PyQt5.QtWidgets import*
 from final_win import *
 class TestWin(QWidget):
@@ -22,7 +24,12 @@ class TestWin(QWidget):
         self.c=QPushButton('Начать финальный тест',self)
         self.okoshko4=QLineEdit(' ')
         self.okoshko5=QLineEdit(' ')
-        self.h=QLabel('timer')
+        time = QTime(0, 0, 15)        
+        self.h=QLabel(time.toString("hh:mm:ss"))
+        self.h.setFont(QFont('Times',36,QFont.Bold))
+        self.loc=QLocale(QLocale.English,QLocale.UnitedStates)
+        self.validator=QDoubleValidator()
+        self.validator.setLocale(self.loc)
         self.k=QPushButton('Отправить результаты',self)
         self.layout_line=QVBoxLayout()
         self.layout_line.addWidget(self.pupu,alignment=Qt.AlignLeft)
@@ -44,10 +51,74 @@ class TestWin(QWidget):
         self.layout_line.addWidget(self.k,alignment=Qt.AlignCenter)
         self.setLayout(self.layout_line)
     def next_click2(self):
-        self.tw=FinalWin()
+        self.tw=FinalWin(rezult)
         self.hide()
+
+    def timer_test1(self):
+        global time
+        time = QTime(0,0,15)
+        self.timer=QTimer()
+        self.timer.timeout.connect(self.timer1Event)
+        self.timer.start(1000)
+    def timer1Event(self):
+        global time
+        time=time.addSecs(-1)
+        self.h.setText(time.toString('hh:mm:ss'))
+        if int(time.toString('hh:mm:ss')[6:8])>=10:
+           self.h.setStyleSheet('color:rgb(0,254,0)')
+        elif int(time.toString('hh:mm:ss')[6:8])<=5:
+           self.h.setStyleSheet('color:rgb(254,0,0)')
+        else:
+            self.h.setStyleSheet('color:rgb(0,0,0)')
+        self.h.setFont(QFont('Times',36,QFont.Bold))
+        if time.toString('hh:mm:ss')=='00:00:00':
+            self.timer.stop()
+
+    def timer_test2(self):
+        global time
+        time = QTime(0,0,45)
+        self.timer=QTimer()
+        self.timer.timeout.connect(self.timer2Event)
+        self.timer.start(1000)
+    def timer2Event(self):
+        global time
+        time=time.addSecs(-1)
+        self.h.setText(time.toString('hh:mm:ss'))
+        if int(time.toString('hh:mm:ss')[6:8])>=30:
+           self.h.setStyleSheet('color:rgb(0,254,0)')
+        elif int(time.toString('hh:mm:ss')[6:8])<=15:
+           self.h.setStyleSheet('color:rgb(254,0,0)')
+        else:
+            self.h.setStyleSheet('color:rgb(0,0,0)')
+        self.h.setFont(QFont('Times',36,QFont.Bold))
+        if time.toString('hh:mm:ss')=='00:00:00':
+            self.timer.stop()
+
+    def timer_test3(self):
+        global time
+        time = QTime(0,1,00)
+        self.timer=QTimer()
+        self.timer.timeout.connect(self.timer3Event)
+        self.timer.start(1000)
+    def timer3Event(self):
+        global time
+        time=time.addSecs(-1)
+        self.h.setText(time.toString('hh:mm:ss'))
+        if int(time.toString('hh:mm:ss')[6:8])>=40:
+           self.h.setStyleSheet('color:rgb(0,254,0)')
+        elif int(time.toString('hh:mm:ss')[6:8])<=20:
+           self.h.setStyleSheet('color:rgb(254,0,0)')
+        else:
+            self.h.setStyleSheet('color:rgb(0,0,0)')
+        self.h.setFont(QFont('Times',36,QFont.Bold))
+        if time.toString('hh:mm:ss')=='00:00:00':
+            self.timer.stop()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
     def connects(self):
         self.k.clicked.connect(self.next_click2)
+        self.tututu.clicked.connect(self.timer_test1)
+        self.b.clicked.connect(self.timer_test2)
+        self.c.clicked.connect(self.timer_test3)
     def set_appear(self):
         win_x, win_y =200,100
         win_width,win_height=1000,600
