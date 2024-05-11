@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import*
-from qq import*
+from mainwin import*
 class DESCR(QWidget):
     def __init__(self):
         super().__init__()
@@ -27,13 +27,17 @@ class DESCR(QWidget):
         self.setLayout(self.layout_line)
     
     def next_click2(self):
-        self.tw=MainWin(self)
+        self.tw=MainWin()
         self.hide()
-    def otvet111(self):
-        otvettt=int(self.a.text(),self.b.text(),self.c.text())
+    def otvet_descr(self):
+        otvet_a=int(self.a.text())
+        otvet_b=int(self.b.text())
+        otvet_b=int(self.c.text())
+
+
     def connects(self):
         self.back1.clicked.connect(self.next_click2)
-        self.otvet1.clicked.connect(self.otvet111)
+        self.otvet1.clicked.connect(self.otvet_descr)
     def set_appear(self):
         win_x, win_y =200,100
         win_width,win_height=1000,600
